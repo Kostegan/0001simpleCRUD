@@ -11,11 +11,11 @@ import java.util.List;
 import com.junald.model.Student;
 import com.junald.util.DBUtil;
 
-public class StudentDAOImplementation implements StudentDAO {
+public class UserDAOImpl implements UserDAO {
 
     private Connection conn;
 
-    public StudentDAOImplementation() {
+    public UserDAOImpl() {
         conn = DBUtil.getConnection();
     }
     @Override

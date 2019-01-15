@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.junald.model.Student;
 
-public interface StudentDAO {
+public interface UserDAO {
     public void addStudent( Student student );
     public void deleteStudent( int studentId );
     public void updateStudent( Student student );
