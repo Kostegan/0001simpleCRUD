@@ -2,12 +2,12 @@ package com.junald.dao;
 
 import java.util.List;
 
-import com.junald.model.Student;
+import com.junald.model.User;
 
 public interface UserDAO {
-    public void addStudent( Student student );
+    public void addStudent( User user);
     public void deleteStudent( int studentId );
-    public void updateStudent( Student student );
-    public List<Student> getAllStudents();
-    public Student getStudentById( int studentId );
+    public void updateStudent( User user);
+    public List<User> getAllStudents();
+    public User getStudentById(int studentId );
 }

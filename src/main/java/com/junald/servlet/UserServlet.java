@@ -1,7 +1,6 @@
 package com.junald.servlet;
 
 import java.io.IOException;
-import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.junald.dao.UserDAO;
 import com.junald.dao.UserDAOImpl;
-import com.junald.model.Student;
 
 @WebServlet("/users")
 public class UserServlet extends HttpServlet {

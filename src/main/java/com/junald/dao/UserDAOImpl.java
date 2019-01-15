@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.junald.model.Student;
+import com.junald.model.User;
 import com.junald.util.DBUtil;
 
 public class UserDAOImpl implements UserDAO {
@@ -19,13 +19,13 @@ public class UserDAOImpl implements UserDAO {
         conn = DBUtil.getConnection();
     }
     @Override
-    public void addStudent( Student student ) {
+    public void addStudent( User user) {
         try {
             String query = "insert into student (name, password, login) values (?,?,?)";
             PreparedStatement preparedStatement = conn.prepareStatement( query );
-            preparedStatement.setString( 1, student.getName() );
-            preparedStatement.setString( 2, student.getPassword() );
-            preparedStatement.setString(3, student.getLogin());
+            preparedStatement.setString( 1, user.getName() );
+            preparedStatement.setString( 2, user.getPassword() );
+            preparedStatement.setString(3, user.getLogin());
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -45,14 +45,14 @@ public class UserDAOImpl implements UserDAO {
         }
     }
     @Override
-    public void updateStudent( Student student ) {
+    public void updateStudent( User user) {
         try {
             String query = "update student set name=?, password=?, login=? where id=?";
             PreparedStatement preparedStatement = conn.prepareStatement( query );
-            preparedStatement.setString( 1, student.getName() );
-            preparedStatement.setString( 2, student.getPassword() );
-            preparedStatement.setString(3, student.getLogin());
-            preparedStatement.setInt(4, student.getId());
+            preparedStatement.setString( 1, user.getName() );
+            preparedStatement.setString( 2, user.getPassword() );
+            preparedStatement.setString(3, user.getLogin());
+            preparedStatement.setInt(4, user.getId());
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -60,46 +60,46 @@ public class UserDAOImpl implements UserDAO {
         }
     }
     @Override
-    public List<Student> getAllStudents() {
-        List<Student> students = new ArrayList<>();
+    public List<User> getAllStudents() {
+        List<User> users = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery( "select * from student" );
             while( resultSet.next() ) {
-                Student student = new Student();
-                student.setId(resultSet.getInt("id"));
-                student.setName(resultSet.getString("name"));
-                student.setPassword(resultSet.getString("password"));
-                student.setLogin(resultSet.getString("login"));
-                students.add(student);
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setPassword(resultSet.getString("password"));
+                user.setLogin(resultSet.getString("login"));
+                users.add(user);
             }
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return students;
+        return users;
     }
     @Override
-    public Student getStudentById(int studentId) {
-        Student student = new Student();
+    public User getStudentById(int studentId) {
+        User user = new User();
         try {
             String query = "select * from student where id=?";
             PreparedStatement preparedStatement = conn.prepareStatement( query );
             preparedStatement.setInt(1, studentId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while( resultSet.next() ) {
-                student.setId(resultSet.getInt("id"));
-                student.setName(resultSet.getString("name"));
-                student.setPassword(resultSet.getString("password"));
-                student.setLogin(resultSet.getString("login"));
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setPassword(resultSet.getString("password"));
+                user.setLogin(resultSet.getString("login"));
             }
             resultSet.close();
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return student;
+        return user;
     }
 
 }

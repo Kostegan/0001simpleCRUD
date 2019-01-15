@@ -2,7 +2,7 @@ package com.junald.servlet;
 
 import com.junald.dao.UserDAO;
 import com.junald.dao.UserDAOImpl;
-import com.junald.model.Student;
+import com.junald.model.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,11 +22,11 @@ public class AddUser extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Student student = new Student();
-        student.setName(request.getParameter("name"));
-        student.setPassword(request.getParameter("password"));
-        student.setLogin(request.getParameter("login"));
-        dao.addStudent(student);
+        User user = new User();
+        user.setName(request.getParameter("name"));
+        user.setPassword(request.getParameter("password"));
+        user.setLogin(request.getParameter("login"));
+        dao.addStudent(user);
         RequestDispatcher view = request.getRequestDispatcher("listUsers.jsp");
         request.setAttribute("users", dao.getAllStudents());
         view.forward(request, response);

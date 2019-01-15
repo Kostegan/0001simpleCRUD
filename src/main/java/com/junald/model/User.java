@@ -1,6 +1,6 @@
 package com.junald.model;
 
-public class Student {
+public class User {
 
     private int id;
     private String name;
@@ -41,7 +41,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student [id=" + id + ", name=" + name
+        return "User [id=" + id + ", name=" + name
                 + ", password=" + password + ", login=" + login
                 + "]";
     }

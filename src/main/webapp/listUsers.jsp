@@ -34,7 +34,7 @@
     </tbody>
 </table>
 <p>
-    <a href="addUser.jsp">Add Student</a>
+    <a href="addUser.jsp">Add User</a>
 </p>
 </body>
 </html>

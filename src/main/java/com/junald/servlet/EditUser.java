@@ -2,7 +2,7 @@ package com.junald.servlet;
 
 import com.junald.dao.UserDAO;
 import com.junald.dao.UserDAOImpl;
-import com.junald.model.Student;
+import com.junald.model.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/edit")
 public class EditUser extends HttpServlet {
     private UserDAO dao;
-    private Student student;
+    private User user;
 
     public EditUser() {
         dao = new UserDAOImpl();
@@ -23,10 +23,10 @@ public class EditUser extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        student.setName(request.getParameter("name"));
-        student.setPassword(request.getParameter("password"));
-        student.setLogin(request.getParameter("login"));
-        dao.updateStudent(student);
+        user.setName(request.getParameter("name"));
+        user.setPassword(request.getParameter("password"));
+        user.setLogin(request.getParameter("login"));
+        dao.updateStudent(user);
         RequestDispatcher view = request.getRequestDispatcher("listUsers.jsp");
         request.setAttribute("users", dao.getAllStudents());
         view.forward(request, response);
@@ -34,9 +34,9 @@ public class EditUser extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        student = dao.getStudentById(Integer.parseInt(request.getParameter("userId")));
+        user = dao.getStudentById(Integer.parseInt(request.getParameter("userId")));
         RequestDispatcher view = request.getRequestDispatcher("editUser.jsp");
-        request.setAttribute("users", student);
+        request.setAttribute("users", user);
         view.forward(request, response);
     }
 }
