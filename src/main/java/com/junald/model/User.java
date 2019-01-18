@@ -7,6 +7,16 @@ public class User {
     private String password;
     private String login;
 
+    public User() {
+    }
+
+    public User(int id, String name, String password, String login) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.login = login;
+    }
+
     public int getId() {
         return id;
     }

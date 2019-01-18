@@ -8,98 +8,68 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.junald.executor.Executor;
+import com.junald.executor.ResultHandler;
 import com.junald.model.User;
-import com.junald.util.DBUtil;
+import com.junald.util.DBHelper;
 
 public class UserDAOImpl implements UserDAO {
+    private final Executor executor;
 
-    private Connection conn;
+    public UserDAOImpl(Connection connection) {
+        executor = new Executor(connection);
+    }
 
-    public UserDAOImpl() {
-        conn = DBUtil.getConnection();
-    }
     @Override
-    public void addStudent( User user) {
-        try {
-            String query = "insert into student (name, password, login) values (?,?,?)";
-            PreparedStatement preparedStatement = conn.prepareStatement( query );
-            preparedStatement.setString( 1, user.getName() );
-            preparedStatement.setString( 2, user.getPassword() );
-            preparedStatement.setString(3, user.getLogin());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void addUser(User user) throws SQLException {
+        String name = user.getName();
+        String password = user.getPassword();
+        String login = user.getLogin();
+        executor.execUpdate("insert into user (name, password, login) values ('" + name + "','" + password + "','" + login + "')");
     }
+
     @Override
-    public void deleteStudent( int studentId ) {
-        try {
-            String query = "delete from student where id=?";
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, studentId);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void deleteUser(int userId) throws SQLException {
+        executor.execUpdate("delete from user where id=" + userId);
     }
+
     @Override
-    public void updateStudent( User user) {
-        try {
-            String query = "update student set name=?, password=?, login=? where id=?";
-            PreparedStatement preparedStatement = conn.prepareStatement( query );
-            preparedStatement.setString( 1, user.getName() );
-            preparedStatement.setString( 2, user.getPassword() );
-            preparedStatement.setString(3, user.getLogin());
-            preparedStatement.setInt(4, user.getId());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void updateUser(User user) throws SQLException {
+        String name = user.getName();
+        String password = user.getPassword();
+        String login = user.getLogin();
+        executor.execUpdate("update user set name='" + name + "', password='" + password + "', login='" + login + "' where id=" + user.getId());
     }
+
     @Override
-    public List<User> getAllStudents() {
+    public User getUserById(int userId) throws SQLException {
+        return executor.execQuery("select * from user where id=" + userId, new ResultHandler<User>() {
+            @Override
+            public User handle(ResultSet resultSet) throws SQLException {
+                if (resultSet.next()) {
+                    return new User(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("password"), resultSet.getString("login"));
+                }
+                return null;   //todo уточнить
+            }
+        });
+    }
+
+    @Override
+    public List<User> getAllUser() throws SQLException {
         List<User> users = new ArrayList<>();
-        try {
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery( "select * from student" );
-            while( resultSet.next() ) {
-                User user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setName(resultSet.getString("name"));
-                user.setPassword(resultSet.getString("password"));
-                user.setLogin(resultSet.getString("login"));
-                users.add(user);
+        return executor.execQuery("select * from user", new ResultHandler<List<User>>() {
+            @Override
+            public List<User> handle(ResultSet resultSet) throws SQLException {
+                while (resultSet.next()) {
+                    User user = new User();
+                    user.setId(resultSet.getInt("id"));
+                    user.setName(resultSet.getString("name"));
+                    user.setPassword(resultSet.getString("password"));
+                    user.setLogin(resultSet.getString("login"));
+                    users.add(user);
+                }
+                return users;
             }
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return users;
+        });
     }
-    @Override
-    public User getStudentById(int studentId) {
-        User user = new User();
-        try {
-            String query = "select * from student where id=?";
-            PreparedStatement preparedStatement = conn.prepareStatement( query );
-            preparedStatement.setInt(1, studentId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while( resultSet.next() ) {
-                user.setId(resultSet.getInt("id"));
-                user.setName(resultSet.getString("name"));
-                user.setPassword(resultSet.getString("password"));
-                user.setLogin(resultSet.getString("login"));
-            }
-            resultSet.close();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
 }

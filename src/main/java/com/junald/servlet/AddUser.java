@@ -3,6 +3,8 @@ package com.junald.servlet;
 import com.junald.dao.UserDAO;
 import com.junald.dao.UserDAOImpl;
 import com.junald.model.User;
+import com.junald.services.DBService;
+import com.junald.services.DBServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,10 +16,9 @@ import java.io.IOException;
 
 @WebServlet("/add")
 public class AddUser extends HttpServlet {
-    private UserDAO dao;
+    private DBService dbService = DBServiceImpl.getInstance();
 
     public AddUser() {
-        dao = new UserDAOImpl();
     }
 
     @Override
@@ -26,9 +27,9 @@ public class AddUser extends HttpServlet {
         user.setName(request.getParameter("name"));
         user.setPassword(request.getParameter("password"));
         user.setLogin(request.getParameter("login"));
-        dao.addStudent(user);
+        dbService.addUser(user);
         RequestDispatcher view = request.getRequestDispatcher("listUsers.jsp");
-        request.setAttribute("users", dao.getAllStudents());
+        request.setAttribute("users", dbService.getAllUsers());
         view.forward(request, response);
     }
 }
