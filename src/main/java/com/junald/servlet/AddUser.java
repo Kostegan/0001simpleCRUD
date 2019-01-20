@@ -16,9 +16,6 @@ import java.io.IOException;
 public class AddUser extends HttpServlet {
     private DBService dbService = DBServiceImpl.getInstance();
 
-    public AddUser() {
-    }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDataSet userDataSet = new UserDataSet();

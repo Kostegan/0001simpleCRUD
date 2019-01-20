@@ -17,9 +17,6 @@ import java.io.IOException;
 public class DeleteUser extends HttpServlet {
     private DBService dbService = DBServiceImpl.getInstance();
 
-    public DeleteUser() {
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         dbService.deleteUser(Integer.parseInt(request.getParameter("userId")));

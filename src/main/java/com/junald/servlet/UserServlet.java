@@ -18,9 +18,6 @@ import com.junald.services.DBServiceImpl;
 public class UserServlet extends HttpServlet {
     private DBService dbService = DBServiceImpl.getInstance();
 
-    public UserServlet() {
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("listUsers.jsp");
         List<UserDataSet> list = dbService.getAllUsers();

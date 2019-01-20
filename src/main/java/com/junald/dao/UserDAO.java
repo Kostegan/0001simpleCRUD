@@ -1,19 +1,17 @@
 package com.junald.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.junald.model.UserDataSet;
-import com.junald.model.UserDataSet;
 
 public interface UserDAO {
-    public void addUser(String name,String password, String login) throws SQLException;
+    void addUser(String name, String password, String login);
 
-    public void deleteUser(int userId) throws SQLException;
+    void deleteUser(int userId);
 
-    public void updateUser(String name,String password, String login) throws SQLException;
+    void updateUser(String name, String password, String login);
 
-    public List<UserDataSet> getAllUser();
+    List<UserDataSet> getAllUser();
 
-    public UserDataSet getUserById(int userId);
+    UserDataSet getUserById(int userId);
 }

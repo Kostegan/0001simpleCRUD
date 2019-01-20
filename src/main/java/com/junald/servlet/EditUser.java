@@ -17,9 +17,6 @@ public class EditUser extends HttpServlet {
     private DBService dbService = DBServiceImpl.getInstance();
     private UserDataSet userDataSet;
 
-    public EditUser() {
-    }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         userDataSet.setName(request.getParameter("name"));

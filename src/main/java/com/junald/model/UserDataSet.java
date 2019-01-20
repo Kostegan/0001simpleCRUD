@@ -22,7 +22,6 @@ public class UserDataSet {
     }
 
 
-
     public UserDataSet(int id, String name, String password, String login) {
         this.id = id;
         this.name = name;

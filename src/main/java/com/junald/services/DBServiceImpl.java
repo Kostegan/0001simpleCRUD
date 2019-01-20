@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class DBServiceImpl implements DBService {
@@ -50,42 +49,30 @@ public class DBServiceImpl implements DBService {
 
     @Override
     public void deleteUser(int id) {
-        try {
-            Session session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
-            UserDAO dao = new UserDAOImpl(session);
-            dao.deleteUser(id);
-            transaction.commit();
-            session.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        UserDAO dao = new UserDAOImpl(session);
+        dao.deleteUser(id);
+        transaction.commit();
+        session.close();
     }
 
     @Override
     public void addUser(UserDataSet userDataSet) {
-        try {
-            Session session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
-            UserDAO dao = new UserDAOImpl(session);
-            dao.addUser(userDataSet.getName(), userDataSet.getPassword(), userDataSet.getLogin());
-            transaction.commit();
-            session.close();
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        UserDAO dao = new UserDAOImpl(session);
+        dao.addUser(userDataSet.getName(), userDataSet.getPassword(), userDataSet.getLogin());
+        transaction.commit();
+        session.close();
     }
 
     @Override
     public void updateUser(UserDataSet userDataSet) {
-        try {
-            Session session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
-            UserDAO dao = new UserDAOImpl(session);
-            dao.updateUser(userDataSet.getName(), userDataSet.getPassword(), userDataSet.getLogin());
-            transaction.commit();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        UserDAO dao = new UserDAOImpl(session);
+        dao.updateUser(userDataSet.getName(), userDataSet.getPassword(), userDataSet.getLogin());
+        transaction.commit();
     }
 }
