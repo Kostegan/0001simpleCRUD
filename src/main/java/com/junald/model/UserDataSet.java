@@ -1,17 +1,36 @@
 package com.junald.model;
 
-public class User {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "user")
+public class UserDataSet {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "name")
     private String name;
+    @Column(name = "password")
     private String password;
+    @Column(name = "login")
     private String login;
 
-    public User() {
+    public UserDataSet() {
     }
 
-    public User(int id, String name, String password, String login) {
+
+
+    public UserDataSet(int id, String name, String password, String login) {
         this.id = id;
+        this.name = name;
+        this.password = password;
+        this.login = login;
+    }
+
+    public UserDataSet(String name, String password, String login) {
         this.name = name;
         this.password = password;
         this.login = login;
@@ -51,7 +70,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name
+        return "UserDataSet [id=" + id + ", name=" + name
                 + ", password=" + password + ", login=" + login
                 + "]";
     }

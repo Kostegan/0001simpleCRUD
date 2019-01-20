@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.junald.dao.UserDAO;
-import com.junald.dao.UserDAOImpl;
-import com.junald.model.User;
+import com.junald.model.UserDataSet;
 import com.junald.services.DBService;
 import com.junald.services.DBServiceImpl;
 
@@ -25,7 +23,7 @@ public class UserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("listUsers.jsp");
-        List<User> list = dbService.getAllUsers();
+        List<UserDataSet> list = dbService.getAllUsers();
         request.setAttribute("users", list);
         view.forward(request, response);
     }

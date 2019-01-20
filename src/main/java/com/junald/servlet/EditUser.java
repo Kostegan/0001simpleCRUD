@@ -1,8 +1,6 @@
 package com.junald.servlet;
 
-import com.junald.dao.UserDAO;
-import com.junald.dao.UserDAOImpl;
-import com.junald.model.User;
+import com.junald.model.UserDataSet;
 import com.junald.services.DBService;
 import com.junald.services.DBServiceImpl;
 
@@ -17,17 +15,17 @@ import java.io.IOException;
 @WebServlet("/edit")
 public class EditUser extends HttpServlet {
     private DBService dbService = DBServiceImpl.getInstance();
-    private User user;
+    private UserDataSet userDataSet;
 
     public EditUser() {
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        user.setName(request.getParameter("name"));
-        user.setPassword(request.getParameter("password"));
-        user.setLogin(request.getParameter("login"));
-        dbService.updateUser(user);
+        userDataSet.setName(request.getParameter("name"));
+        userDataSet.setPassword(request.getParameter("password"));
+        userDataSet.setLogin(request.getParameter("login"));
+        dbService.updateUser(userDataSet);
         RequestDispatcher view = request.getRequestDispatcher("listUsers.jsp");
         request.setAttribute("users", dbService.getAllUsers());
         view.forward(request, response);
@@ -35,9 +33,9 @@ public class EditUser extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        user = dbService.getUserById(Integer.parseInt(request.getParameter("userId")));
+        userDataSet = dbService.getUserById(Integer.parseInt(request.getParameter("userId")));
         RequestDispatcher view = request.getRequestDispatcher("editUser.jsp");
-        request.setAttribute("users", user);
+        request.setAttribute("users", userDataSet);
         view.forward(request, response);
     }
 }

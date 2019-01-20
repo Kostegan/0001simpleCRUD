@@ -1,8 +1,6 @@
 package com.junald.servlet;
 
-import com.junald.dao.UserDAO;
-import com.junald.dao.UserDAOImpl;
-import com.junald.model.User;
+import com.junald.model.UserDataSet;
 import com.junald.services.DBService;
 import com.junald.services.DBServiceImpl;
 
@@ -23,11 +21,11 @@ public class AddUser extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = new User();
-        user.setName(request.getParameter("name"));
-        user.setPassword(request.getParameter("password"));
-        user.setLogin(request.getParameter("login"));
-        dbService.addUser(user);
+        UserDataSet userDataSet = new UserDataSet();
+        userDataSet.setName(request.getParameter("name"));
+        userDataSet.setPassword(request.getParameter("password"));
+        userDataSet.setLogin(request.getParameter("login"));
+        dbService.addUser(userDataSet);
         RequestDispatcher view = request.getRequestDispatcher("listUsers.jsp");
         request.setAttribute("users", dbService.getAllUsers());
         view.forward(request, response);
