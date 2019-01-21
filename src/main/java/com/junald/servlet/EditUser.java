@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/edit")
 public class EditUser extends HttpServlet {
     private DBService dbService = DBServiceImpl.getInstance();
-    private UserDataSet userDataSet;
+    private UserDataSet userDataSet; // todo remove
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
