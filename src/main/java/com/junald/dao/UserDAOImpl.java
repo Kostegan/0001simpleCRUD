@@ -20,7 +20,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void deleteUser(int userId) {
-        UserDataSet tempUser = new UserDataSet();
+        UserDataSet tempUser = new UserDataSet(); //todo уточнить
         tempUser.setId(userId);
         session.delete(tempUser);
     }
