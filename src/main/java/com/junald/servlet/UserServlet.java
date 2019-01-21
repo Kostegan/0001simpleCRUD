@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.junald.dao.UserDAO;
-import com.junald.dao.UserDAOImpl;
 import com.junald.model.User;
 import com.junald.services.DBService;
 import com.junald.services.DBServiceImpl;

@@ -55,5 +55,4 @@ public class User {
                 + ", password=" + password + ", login=" + login
                 + "]";
     }
-
 }

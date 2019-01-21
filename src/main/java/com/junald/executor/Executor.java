@@ -27,5 +27,4 @@ public class Executor {
         statement.close();
         return value;
     }
-
 }

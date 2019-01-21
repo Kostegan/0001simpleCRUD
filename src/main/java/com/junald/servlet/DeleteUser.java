@@ -1,7 +1,5 @@
 package com.junald.servlet;
 
-import com.junald.dao.UserDAO;
-import com.junald.dao.UserDAOImpl;
 import com.junald.services.DBService;
 import com.junald.services.DBServiceImpl;
 
