@@ -1,8 +1,8 @@
-<%@ page import="com.junald.model.UserDataSet" %>
+<%@ page import="com.junald.model.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  UserDataSet: kos
+  User: kos
   Date: 13.01.2019
   Time: 16:31
   To change this template use File | Settings | File Templates.
@@ -13,23 +13,22 @@
     <title>Title</title>
 </head>
 <body>
-<% UserDataSet userDataSet = (UserDataSet) request.getAttribute("users"); %>
+<% User user = (User) request.getAttribute("user"); %>
 <form action="edit" method="post">
     <fieldset>
         <div>
-            <label for="name">Student Name</label> <input type="text" id="name"
-                                                          name="name" value="<%=userDataSet.getName()%>"/>
+            <label for="name">User name</label> <input id="name" type="text" name="name" value="<%=user.getName()%>">
         </div>
         <div>
             <label for="password">Student Password</label> <input type="text" id="password" name="password"
-                                                                  value="<%=userDataSet.getPassword()%>"/>
+                                                                  value="<%=user.getPassword()%>"/>
         </div>
         <div>
             <label for="login">Student Login</label> <input type="text" name="login" id="login"
-                                                            value="<%=userDataSet.getLogin()%>"/>
+                                                            value="<%=user.getLogin()%>"/>
         </div>
         <div>
-            <input type="submit" value="Submit"/>
+            <button type="submit" name="id" value="<%=user.getId()%>">Submit</button>
         </div>
     </fieldset>
 </form>

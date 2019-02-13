@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
-public class UserDataSet {
+public class User {
 
     @Id
     @Column(name = "id")
@@ -18,18 +18,18 @@ public class UserDataSet {
     @Column(name = "login")
     private String login;
 
-    public UserDataSet() {
+    public User() {
     }
 
 
-    public UserDataSet(int id, String name, String password, String login) {
+    public User(int id, String name, String password, String login) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.login = login;
     }
 
-    public UserDataSet(String name, String password, String login) {
+    public User(String name, String password, String login) {
         this.name = name;
         this.password = password;
         this.login = login;
@@ -69,7 +69,7 @@ public class UserDataSet {
 
     @Override
     public String toString() {
-        return "UserDataSet [id=" + id + ", name=" + name
+        return "User [id=" + id + ", name=" + name
                 + ", password=" + password + ", login=" + login
                 + "]";
     }

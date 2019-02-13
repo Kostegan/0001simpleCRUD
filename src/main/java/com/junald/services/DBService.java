@@ -1,17 +1,17 @@
 package com.junald.services;
 
-import com.junald.model.UserDataSet;
+import com.junald.model.User;
 
 import java.util.List;
 
 public interface DBService {
-    List<UserDataSet> getAllUsers();
+    List<User> getAllUsers();
 
-    UserDataSet getUserById(int id);
+    User getUserById(int id);
 
     void deleteUser(int id);
 
-    void addUser(UserDataSet userDataSet);
+    void addUser(User user);
 
-    void updateUser(UserDataSet userDataSet);
+    void updateUser(User user);
 }

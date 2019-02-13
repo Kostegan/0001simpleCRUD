@@ -1,78 +1,54 @@
 package com.junald.services;
 
-import com.junald.dao.UserDAO;
-import com.junald.dao.UserDAOImpl;
-import com.junald.model.UserDataSet;
-import com.junald.util.DBHelper;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import com.junald.dao.UserDao;
+import com.junald.dao.UserDaoFactory;
+import com.junald.model.User;
 
 import java.util.List;
 
 public class DBServiceImpl implements DBService {
-    private static DBService dbService = new DBServiceImpl();
-    private final SessionFactory sessionFactory;
+    private static volatile DBService instance;
+    private static final UserDao dao = UserDaoFactory.getUserDao();
 
     private DBServiceImpl() {
-        Configuration configuration = DBHelper.getConfiguration();
-        this.sessionFactory = DBHelper.createSessionFactory(configuration);
     }
 
     public static DBService getInstance() {
-        return dbService;
+        DBService localInstance = instance;
+        if (localInstance == null) {
+            synchronized (DBService.class) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new DBServiceImpl();
+                }
+            }
+        }
+        return localInstance;
     }
 
     @Override
-    public List<UserDataSet> getAllUsers() {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        UserDAO dao = new UserDAOImpl(session);
-        List<UserDataSet> users = dao.getAllUser();
-        transaction.commit();
-        session.close();
-        return users;
+    public List<User> getAllUsers() {
+        return dao.getAllUser();
+
     }
 
     @Override
-    public UserDataSet getUserById(int id) {
-        UserDataSet userDataSet = null;
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        UserDAO dao = new UserDAOImpl(session);
-        userDataSet = dao.getUserById(id);
-        transaction.commit();
-        session.close();
-        return userDataSet;
+    public User getUserById(int id) {
+        return dao.getUserById(id);
     }
 
     @Override
     public void deleteUser(int id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        UserDAO dao = new UserDAOImpl(session);
         dao.deleteUser(id);
-        transaction.commit();
-        session.close();
     }
 
     @Override
-    public void addUser(UserDataSet userDataSet) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        UserDAO dao = new UserDAOImpl(session);
-        dao.addUser(userDataSet.getName(), userDataSet.getPassword(), userDataSet.getLogin());
-        transaction.commit();
-        session.close();
+    public void addUser(User user) {
+        dao.addUser(user);
     }
 
     @Override
-    public void updateUser(UserDataSet userDataSet) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        UserDAO dao = new UserDAOImpl(session);
-        dao.updateUser(userDataSet.getName(), userDataSet.getPassword(), userDataSet.getLogin());
-        transaction.commit();
+    public void updateUser(User user) {
+        dao.updateUser(user);
     }
 }

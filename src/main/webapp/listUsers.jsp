@@ -19,16 +19,16 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${users}" var="userDataSet">
+    <c:forEach items="${users}" var="user">
         <tr>
-            <td><c:out value="${userDataSet.id}"/></td>
-            <td><c:out value="${userDataSet.name}"/></td>
-            <td><c:out value="${userDataSet.password}"/></td>
-            <td><c:out value="${userDataSet.login}"/></td>
+            <td><c:out value="${user.id}"/></td>
+            <td><c:out value="${user.name}"/></td>
+            <td><c:out value="${user.password}"/></td>
+            <td><c:out value="${user.login}"/></td>
             <td><a
-                    href="edit?userId=<c:out value="${userDataSet.id}"/>">Update</a></td>
+                    href="edit?id=<c:out value="${user.id}"/>">Update</a></td>
             <td><a
-                    href="delete?userId=<c:out value="${userDataSet.id }"/>">Delete</a></td>
+                    href="delete?userId=<c:out value="${user.id }"/>">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>
