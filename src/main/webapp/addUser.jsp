@@ -29,6 +29,16 @@
                                                             placeholder="Login"/>
         </div>
         <div>
+            <table>
+                <tr>
+                    <td>Role:</td>
+                    <td><input type="radio" name="role" value="user" checked>user</input><br>
+                        <input type="radio" name="role" value="admin">admin</input>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
             <input type="submit" value="Submit"/>
         </div>
     </fieldset>

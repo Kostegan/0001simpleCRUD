@@ -14,6 +14,7 @@
 </head>
 <body>
 <% User user = (User) request.getAttribute("user"); %>
+<%=user.getId()%>
 <form action="edit" method="post">
     <fieldset>
         <div>
@@ -28,8 +29,15 @@
                                                             value="<%=user.getLogin()%>"/>
         </div>
         <div>
+            <td>Role:</td>
+            <td><input type="radio" name="role" value="user" checked>user</input><br>
+                <input type="radio" name="role" value="admin">admin</input>
+            </td>
+        </div>
+        <div>
             <button type="submit" name="id" value="<%=user.getId()%>">Submit</button>
         </div>
+
     </fieldset>
 </form>
 </body>

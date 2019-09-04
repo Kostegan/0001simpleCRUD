@@ -27,6 +27,11 @@ public class DBServiceImpl implements DBService {
     }
 
     @Override
+    public int getUserId(String login) {
+        return dao.getUserId(login);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return dao.getAllUser();
 

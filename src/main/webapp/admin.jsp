@@ -15,6 +15,7 @@
         <th>Name</th>
         <th>Password</th>
         <th>Login</th>
+        <th>Role</th>
         <th colspan="2">Action</th>
     </tr>
     </thead>
@@ -25,6 +26,7 @@
             <td><c:out value="${user.name}"/></td>
             <td><c:out value="${user.password}"/></td>
             <td><c:out value="${user.login}"/></td>
+            <td><c:out value="${user.role}"/></td>
             <td><a
                     href="edit?id=<c:out value="${user.id}"/>">Update</a></td>
             <td><a

@@ -1,5 +1,6 @@
 package com.junald.servlet;
 
+import com.junald.model.Role;
 import com.junald.model.User;
 import com.junald.model.User;
 import com.junald.services.DBService;
@@ -24,9 +25,10 @@ public class EditUserServlet extends HttpServlet {
                 id,
                 request.getParameter("name"),
                 request.getParameter("password"),
-                request.getParameter("login"));
+                request.getParameter("login"),
+                Role.valueOf(request.getParameter("role")));
         dbService.updateUser(user);
-        response.sendRedirect("/users");
+        response.sendRedirect("/admin");
     }
 
     @Override

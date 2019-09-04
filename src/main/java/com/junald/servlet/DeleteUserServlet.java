@@ -18,6 +18,6 @@ public class DeleteUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         dbService.deleteUser(Integer.parseInt(request.getParameter("userId")));
-        response.sendRedirect("/users");
+        response.sendRedirect("/admin");
     }
 }

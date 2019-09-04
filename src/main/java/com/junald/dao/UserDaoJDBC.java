@@ -123,4 +123,21 @@ public class UserDaoJDBC implements UserDao {
         }
         return null;   //todo уточнить
     }
+
+    @Override
+    public int getUserId(String login) {
+        int id = -1;
+        try {
+            id = executor.execQuery("select * from user where login='" + login + "'", result -> {
+                int i = -1;
+                if (result.next()) {
+                    i = result.getInt(1);
+                }
+                return i;
+            });
+        } catch (SQLException e) {
+            System.err.println("Occurred SQL error");
+        }
+        return id;
+    }
 }

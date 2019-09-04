@@ -1,5 +1,6 @@
 package com.junald.servlet;
 
+import com.junald.model.Role;
 import com.junald.model.User;
 import com.junald.services.DBService;
 import com.junald.services.DBServiceImpl;
@@ -21,7 +22,8 @@ public class AddUserServlet extends HttpServlet {
         user.setName(request.getParameter("name"));
         user.setPassword(request.getParameter("password"));
         user.setLogin(request.getParameter("login"));
+        user.setRole(Role.valueOf(request.getParameter("role")));
         dbService.addUser(user);
-        response.sendRedirect("/users");
+        response.sendRedirect("/admin");
     }
 }

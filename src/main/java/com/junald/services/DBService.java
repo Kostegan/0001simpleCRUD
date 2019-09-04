@@ -7,6 +7,8 @@ import java.util.List;
 public interface DBService {
     List<User> getAllUsers();
 
+    int getUserId(String login);
+
     User getUserById(int id);
 
     void deleteUser(int id);

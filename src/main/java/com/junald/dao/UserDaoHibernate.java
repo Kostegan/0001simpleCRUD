@@ -35,7 +35,7 @@ public class UserDaoHibernate implements UserDao {
     }
 
     @Override
-    public void deleteUser(int userId)  {
+    public void deleteUser(int userId) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
         try {
@@ -53,7 +53,7 @@ public class UserDaoHibernate implements UserDao {
     }
 
     @Override
-    public void updateUser(User user)  {
+    public void updateUser(User user) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
         try {
@@ -108,5 +108,31 @@ public class UserDaoHibernate implements UserDao {
             session.close();
         }
         return user;
+    }
+
+    @Override
+    public int getUserId(String login) {
+        int id = -1;
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            String hql = "from User where login = :login";
+            System.out.println(login);
+            User user = (User) session.createQuery(hql).setParameter("login", login).uniqueResult();
+            System.out.println(user);
+            if (user != null) {
+                id = user.getId();
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            System.err.println("Occurred hibernate error");
+        } finally {
+            session.close();
+        }
+        return id;
     }
 }
